@@ -2,7 +2,7 @@ import React from "react";
 import { useMovieContext } from "../../context/MovieContext/context";
 
 const Input = ({ side }) => {
-  const { setTitle, setLeftTitle, setRightTitle, rightTitle, leftTitle } = useMovieContext();
+  const { setTitle, setLeftTitle, setRightTitle } = useMovieContext();
 
   const handleTitleChange = (e) => {
     const inputValue = e.target.value;

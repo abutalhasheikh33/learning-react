@@ -23,11 +23,7 @@ const Dropdown = ({ side, list }) => {
   }
 
   movies = list == "leftList" ? leftList : rightList;
-  useEffect(() => {
-    if (movies && movies.length > 0) {
-      setList(movies, list);
-    }
-  }, []);
+
   function renderDropDownItems() {
     if (movies && movies.length > 0) {
       return movies.map((movie) => {
