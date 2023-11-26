@@ -53,3 +53,7 @@ figure .image img {
 .hide{
   display: none;
 }
+
+.margin-left{
+  margin-left: 51%;
+}
