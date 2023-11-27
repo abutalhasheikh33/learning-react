@@ -4,7 +4,7 @@ import React from 'react'
 import { useMovieContext } from "../../context/MovieContext/context";
 import { useApi } from "../../hooks/useApi";
 
-const Dropdown = ({title,list,listData}) => {
+const Dropdown = ({title}) => {
   const {setData}  = useMovieContext()
   
   const movies = useApi(title)
