@@ -5,15 +5,13 @@ import { useMovieContext } from "../../context/MovieContext/context";
 import { useApi } from "../../hooks/useApi";
 
 const Dropdown = ({title,list,listData}) => {
-  const {setData,setList}  = useMovieContext()
+  const {setData}  = useMovieContext()
   
   const movies = useApi(title)
   
 
   
-    if (movies && movies.length > 0) {
-      setList(movies, list); 
-    }
+    
  
  
   
@@ -21,9 +19,9 @@ const Dropdown = ({title,list,listData}) => {
   
   function renderDropDownItems(){
    
-    if(listData&&listData.length>0){
+    if(movies&&movies.length>0){
       
-     return listData.map((movie)=>{
+     return movies.map((movie)=>{
        
         return <a className="dropdown-item" id={movie.imdbID}><img src={movie.Poster} />{movie.Title}</a>
        })
@@ -32,7 +30,7 @@ const Dropdown = ({title,list,listData}) => {
    
   }
   return (
-   <div  className={`dropdown ${listData&&listData.length>0?'is-active':''}`} >
+   <div  className={`dropdown ${movies&&movies.length>0?'is-active':''}`} >
       <div className={`dropdown-menu`} style={{position:"static"}} >
 
         <div className="dropdown-content">

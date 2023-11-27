@@ -21,8 +21,7 @@ function App() {
   }
    const [left,setLeft] = useState({});
    const [right,setRight] = useState({})
-   const [leftList,setLeftList] = useState([])
-   const [rightList,setRightList] = useState([])
+   
    
     const setData = (data,side)=>{
       if(side=="left"){
@@ -31,15 +30,9 @@ function App() {
         setRight(data)
       }  
     }
-    const setList = (data,list)=>{
-      if(list == "leftList"){
-        setLeftList(data)
-      }else if(list == "rightList"){
-        setRightList(data)
-      }
-    }
+    
   return (
-    <MovieProvider value={{left,right,leftList,rightList,setData,setTitle,setList}}>
+    <MovieProvider value={{left,right,setData,setTitle}}>
         <Header />
       <div className="container">
     
@@ -49,7 +42,7 @@ function App() {
 
       <div id='left-autocomplete'>
       <Input title={leftTitle} side="left"  />
-      <Dropdown title={leftTitle} side="left" list="leftList" listData={leftList} />
+      <Dropdown title={leftTitle} side="left"   />
       </div>
       
       <Section />
@@ -60,7 +53,7 @@ function App() {
       <div className='column'>
       <div id='right-autocomplete'>
       <Input title={rightTitle} side="right"  />
-      <Dropdown title={rightTitle}  side="right" list="rightList" listData={rightList} />
+      <Dropdown title={rightTitle}  side="right"  />
       </div>
       <Section />
       </div>

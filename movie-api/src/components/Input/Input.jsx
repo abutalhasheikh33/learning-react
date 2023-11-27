@@ -10,7 +10,7 @@ const Input = ({side,title}) => {
   return (
     <>
     <label><b>Search</b></label>
-    <input value={title}  onChange={(e)=>titleChange(e)} class = "input" />
+    <input value={title}  onChange={(e)=>titleChange(e)} className = "input" />
     </>
      
 
