@@ -48,7 +48,7 @@ figure .image img {
 }
 
 .display {
-  display: block;
+  display: inline-block;
 }
 .hide{
   display: none;

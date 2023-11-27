@@ -1,23 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import React from 'react'
 import { useMovieContext } from "../../context/MovieContext/context";
 import { useApi } from "../../hooks/useApi";
 
-const Dropdown = ({side,list}) => {
-  const {title,setData,setList,leftList,rightList}  = useMovieContext()
-  let movies = useApi(title);
-  if(movies&&movies.length>0){
-    setList(movies,list)
-  }
+const Dropdown = ({title,list,listData}) => {
+  const {setData,setList}  = useMovieContext()
   
-  movies = list=="leftList"?leftList:rightList;
+  const movies = useApi(title)
+  
+
+  
+    if (movies && movies.length > 0) {
+      setList(movies, list); 
+    }
+ 
+ 
+  
 
   
   function renderDropDownItems(){
-    
-    if(movies&&movies.length>0){
-     return movies.map((movie)=>{
+   
+    if(listData&&listData.length>0){
+      
+     return listData.map((movie)=>{
        
         return <a className="dropdown-item" id={movie.imdbID}><img src={movie.Poster} />{movie.Title}</a>
        })
@@ -26,10 +32,10 @@ const Dropdown = ({side,list}) => {
    
   }
   return (
-   <div ref={side=="left"?leftRef:rightRef} className={movies&&movies.length>0?'is-active':''} id="dropdown">
-      <div className={`dropdown-menu ${movies && movies.length > 0 ? 'display' : ''}`}>
+   <div  className={`dropdown ${listData&&listData.length>0?'is-active':''}`} >
+      <div className={`dropdown-menu`} style={{position:"static"}} >
 
-        <div className="dropdown-content results">
+        <div className="dropdown-content">
               {renderDropDownItems()}
         </div>
       </div>

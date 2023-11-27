@@ -1,12 +1,16 @@
 import React from 'react'
 import { useMovieContext } from '../../context/MovieContext/context'
 
-const Input = ({side}) => {
+const Input = ({side,title}) => {
   const {setTitle} = useMovieContext()
+  function titleChange(e){
+    setTitle(e.target.value,side)
+  }
+
   return (
     <>
     <label><b>Search</b></label>
-    <input  onChange={(e)=>setTitle(e.target.value)} class = "input" />
+    <input value={title}  onChange={(e)=>titleChange(e)} class = "input" />
     </>
      
 
