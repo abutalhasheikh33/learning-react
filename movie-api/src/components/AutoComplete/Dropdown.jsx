@@ -7,13 +7,25 @@ import { useApi } from "../../hooks/useApi";
 const Dropdown = ({title,data,side}) => {
   const {setData,setTitle}  = useMovieContext()
   const [id,setId] = useState("")
-  const movies = useApi(title,'s')
+  const [movies,setMovies] = useState([])
+  
   const movie =  useApi(id,'i')
+  const moviesData = useApi(title,'s')
+  useEffect(()=>{
+    if(id){
+      setMovies([])
+    }
+    else if(title){
+      setMovies(moviesData)
+    }
+    
+  },[title])
   useEffect(()=>{
     
     if(movie){
       setData(movie,side)
       setTitle(movie.Title,side)
+      setMovies([])
     }
     
     
