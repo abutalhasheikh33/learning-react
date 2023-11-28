@@ -20,17 +20,17 @@ const Dropdown = ({title,data,side}) => {
     }
     
   },[title])
+
   useEffect(()=>{
     
     if(movie){
       setData(movie,side)
+      
       setTitle(movie.Title,side)
       setMovies([])
+      
     }
-    
-    
-
-  },[movie])
+},[movie])
   
   
 

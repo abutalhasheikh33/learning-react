@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Header from './components/Header/Header'
 
 import { MovieProvider } from './context/MovieContext/context';
@@ -22,7 +22,8 @@ function App() {
   }
    const [left,setLeft] = useState({});
    const [right,setRight] = useState({})
-   
+   const [leftClass,setLeftClass] = useState([])
+   const [rightClass,setRightClass] = useState([])
    
     const setData = (data,side)=>{
       if(side=="left"){
@@ -33,6 +34,46 @@ function App() {
         console.log(data)
       }  
     }
+
+    function extractValues(movieDetail){
+      const awards = movieDetail.Awards.split(' ').reduce((prev,word) => {
+        const value = parseInt(word);
+        if(isNaN(value)){
+            return prev;
+        }else{
+            return prev + value;
+        }
+    },0)
+    const boxOffice  = movieDetail.BoxOffice?parseInt(
+        movieDetail.BoxOffice.replace(/\$/g,'').replace(/,/g,'')
+    ):"";
+    // const boxOffice = parseInt(
+    //     movieDetail.BoxOffice.replace(/\$/g,'').replace(/,/g,'')
+    // );
+    const metaScore = parseInt(movieDetail.Metascore);
+    const imdbRating = parseFloat(movieDetail.imdbRating);
+    const imdbVotes = parseInt(movieDetail.imdbVotes.replace(/,/g,''));
+    return {awards,boxOffice,metaScore,imdbRating,imdbVotes}
+  }
+
+  useEffect(()=>{
+    if(Object.keys(left).length>2&&Object.keys(right).length>2){
+     
+      const leftValues = extractValues(left)
+      const rightValues = extractValues(right)
+      Object.keys(leftValues).map((key)=>{
+        if(leftValues[key]>rightValues[key]){
+          setLeftClass((prev)=>[...prev,'is-success'])
+          setRightClass((prev)=>[...prev,'is-danger'])
+        }else{
+          setRightClass((prev)=>[...prev,'is-success'])
+          setLeftClass((prev)=>[...prev,'is-danger'])
+        }
+      })
+    }
+  },[left,right])
+
+
     
   return (
     <MovieProvider value={{left,right,setData,setTitle}}>
@@ -47,7 +88,7 @@ function App() {
       <Input title={leftTitle} side="left"  />
       <Dropdown  title={leftTitle} data={left} side="left"   />
       </div>
-      <Section side="left" movieDetail={left} />
+      <Section side="left" movieDetail={left} classes={leftClass} />
       </div>
        
       
@@ -57,7 +98,7 @@ function App() {
       <Input title={rightTitle} side="right"  />
       <Dropdown title={rightTitle} data={right}  side="right"  />
       </div>
-      <Section side="right" movieDetail={right}  />
+      <Section side="right" movieDetail={right} classes={rightClass}  />
       </div>
     
     </div>
