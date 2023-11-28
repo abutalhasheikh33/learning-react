@@ -14,6 +14,7 @@ function App() {
   const setTitle = (data,side)=>{
     if(side == "left"){
       setLeftTitle(data)
+      
     }
     else{
       setRightTitle(data)
@@ -26,8 +27,10 @@ function App() {
     const setData = (data,side)=>{
       if(side=="left"){
         setLeft(data)
+        console.log(data)
       }else if(side=="right"){
         setRight(data)
+        console.log(data)
       }  
     }
     
@@ -42,10 +45,9 @@ function App() {
 
       <div id='left-autocomplete'>
       <Input title={leftTitle} side="left"  />
-      <Dropdown title={leftTitle} side="left"   />
+      <Dropdown  title={leftTitle} data={left} side="left"   />
       </div>
-      
-      <Section />
+      <Section side="left" movieDetail={left} />
       </div>
        
       
@@ -53,9 +55,9 @@ function App() {
       <div className='column'>
       <div id='right-autocomplete'>
       <Input title={rightTitle} side="right"  />
-      <Dropdown title={rightTitle}  side="right"  />
+      <Dropdown title={rightTitle} data={right}  side="right"  />
       </div>
-      <Section />
+      <Section side="right" movieDetail={right}  />
       </div>
     
     </div>
