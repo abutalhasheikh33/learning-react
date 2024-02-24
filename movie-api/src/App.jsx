@@ -64,7 +64,7 @@ function App() {
       Object.keys(leftValues).map((key)=>{
         if(leftValues[key]>rightValues[key]){
           setLeftClass((prev)=>[...prev,'is-success'])
-          setRightClass((prev)=>[...prev,'is-danger'])
+          setRightClass((prev)=>[...prev,'is- danger'])
         }else{
           setRightClass((prev)=>[...prev,'is-success'])
           setLeftClass((prev)=>[...prev,'is-danger'])
